@@ -1,58 +1,111 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="300" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# StudentHub
 
-## About Laravel
+StudentHub is a small Laravel application for managing student records — register, log in, list, edit, and delete students. This guide walks you through running it on your own machine, step by step.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## What you need before starting
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Install these first:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **PHP 8.3+** — check with `php -v`
+- **Composer** — check with `composer -V`
+- **Node.js 18+ and npm** — check with `node -v` and `npm -v`
+- **MySQL 8+** — check with `mysql -V`
+
+If any of these are missing, install them before continuing:
+- PHP + Composer: [Laravel Herd](https://herd.laravel.com) (Mac/Windows, easiest option) or your OS package manager
+- Node.js: [nodejs.org](https://nodejs.org)
+- MySQL: [Laravel Herd](https://herd.laravel.com) (includes a MySQL service you can start with `herd services:start mysql`), [MySQL Community Server](https://dev.mysql.com/downloads/mysql/), or a GUI tool like [TablePlus](https://tableplus.com)/[MySQL Workbench](https://dev.mysql.com/downloads/workbench/)
+
+## 1. Get the code
+
+```bash
+git clone <this-repo-url>
+cd StudentHubSDJ
+```
+
+## 2. Install dependencies
+
+```bash
+composer install
+npm install
+```
+
+## 3. Set up your environment file
+
+Copy the example environment file and generate an application key:
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+## 4. Create the database
+
+Make sure MySQL is running, then create an empty database for the project:
+
+```bash
+mysql -u root -p -e "CREATE DATABASE studenthub"
+```
+
+Open `.env` and check the `DB_*` values match your local MySQL setup:
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=studenthub
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Update `DB_USERNAME` and `DB_PASSWORD` to match your MySQL credentials (a fresh Herd/local install often uses `root` with no password). Then run the migrations to create the tables:
+
+```bash
+php artisan migrate
+```
+
+## 5. Build the frontend assets
+
+```bash
+npm run build
+```
+
+## 6. Run the app
+
+Start everything (server, queue worker, and Vite) with one command:
+
+```bash
+composer run dev
+```
+
+Then open the URL shown in your terminal (usually `http://localhost:8000`) in your browser.
+
+> If you're using [Laravel Herd](https://herd.laravel.com), the site is already available at `http://studenthubsdj.test` — you don't need to run `composer run dev` to serve it, but you should still run `npm run dev` in a separate terminal while you're editing frontend files so your CSS/JS changes show up.
+
+## Everyday commands
+
+| Task | Command |
+|---|---|
+| Start the app for development | `composer run dev` |
+| Run the test suite | `php artisan test` |
+| Format PHP code | `vendor/bin/pint` |
+| Rebuild frontend assets after edits (if not using `npm run dev`) | `npm run build` |
+
+## Reading this guide in the browser
+
+Once the app is running, you can view this README as a formatted page at [`/readme`](http://localhost:8000/readme) instead of reading raw Markdown.
+
+## Troubleshooting
+
+- **"Vite manifest not found" error** — run `npm run build`, or keep `npm run dev` running in a separate terminal.
+- **`SQLSTATE[HY000] [1045] Access denied` or `[2002] Connection refused`** — MySQL isn't running or your `.env` credentials don't match. Start MySQL and double-check `DB_USERNAME`/`DB_PASSWORD`.
+- **`SQLSTATE[HY000] [1049] Unknown database`** — the database hasn't been created yet; run the `CREATE DATABASE` command from step 4.
+- **Blank page or 500 error** — make sure you ran `php artisan key:generate` and that your database exists and migrations have run.
+- **Changes to `.env` not taking effect** — run `php artisan config:clear`.
 
 ## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
-```
-
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- [Official Laravel documentation](https://laravel.com/docs)
+- [Laracasts](https://laracasts.com) — video tutorials on Laravel, PHP, and testing
