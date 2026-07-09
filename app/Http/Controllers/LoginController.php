@@ -9,12 +9,12 @@ use Illuminate\View\View;
 
 class LoginController extends Controller
 {
-    public function create(): View
+    public function login(): View
     {
         return view('students.login');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function authCheck(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
