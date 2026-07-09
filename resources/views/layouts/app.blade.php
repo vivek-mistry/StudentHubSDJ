@@ -61,7 +61,10 @@
             </ul>
 
             <div class="ms-auto">
-                <a href="#" class="btn btn-outline-danger btn-sm">Logout</a>
+                <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-danger btn-sm">Logout</button>
+                </form>
             </div>
         </div>
     </nav>

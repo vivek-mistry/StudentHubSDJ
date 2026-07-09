@@ -149,7 +149,7 @@
 
                             <div class="text-center mt-4">
                                 Already have an account?
-                                <a href="#">Login</a>
+                                <a href="{{ route('login') }}">Login</a>
                             </div>
 
                         </form>
