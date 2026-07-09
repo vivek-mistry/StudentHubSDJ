@@ -111,11 +111,14 @@
 
                             <div class="mb-3">
                                 <label>Course</label>
-                                <input type="text"
-                                    name="course"
-                                    class="form-control @error('course') is-invalid @enderror"
-                                    placeholder="BCA / MCA"
-                                    value="{{ old('course') }}">
+                                <select name="course" class="form-select @error('course') is-invalid @enderror">
+                                    <option value="">Select Course</option>
+                                    @foreach(['BCA', 'MCA', 'BBA', 'MBA'] as $course)
+                                        <option value="{{ $course }}" {{ old('course') === $course ? 'selected' : '' }}>
+                                            {{ $course }}
+                                        </option>
+                                    @endforeach
+                                </select>
                                 @error('course')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

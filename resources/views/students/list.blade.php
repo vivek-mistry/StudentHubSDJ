@@ -37,8 +37,14 @@
                                 <td>{{ $student->phone }}</td>
                                 <td>{{ $student->course }}</td>
                                 <td>
-                                    <a href="#" class="btn btn-primary btn-sm">Edit</a>
-                                    <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                                    <a href="{{ route('students.edit', $student) }}" class="btn btn-primary btn-sm">Edit</a>
+
+                                    <form action="{{ route('students.destroy', $student) }}" method="POST" class="d-inline"
+                                        onsubmit="return confirm('Are you sure you want to delete this student?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                         @empty
