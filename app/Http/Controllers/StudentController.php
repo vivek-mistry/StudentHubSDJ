@@ -13,7 +13,7 @@ class StudentController extends Controller
     {
         $students = Student::all();
 
-        return view('students.list', compact('students'));
+        return view('students.student_list', compact('students'));
     }
 
     public function edit(Student $student): View
