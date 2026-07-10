@@ -21,8 +21,7 @@ If any of these are missing, install them before continuing:
 ## 1. Get the code
 
 ```bash
-git clone <this-repo-url>
-cd StudentHubSDJ
+git clone https://github.com/vivek-mistry/StudentHubSDJ.git
 ```
 
 ## 2. Install dependencies
