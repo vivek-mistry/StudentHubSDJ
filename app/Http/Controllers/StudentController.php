@@ -16,8 +16,12 @@ class StudentController extends Controller
         return view('students.student_list', compact('students'));
     }
 
-    public function edit(Student $student): View
+    public function edit(int $id): View
     {
+        // $student = Student::findOrFail($id);
+
+        $student = Student::where('id', $id)->first();
+
         return view('students.edit', compact('student'));
     }
 

@@ -21,7 +21,7 @@ Route::post('/register', [RegisterController::class, 'store'])->name('students.s
 // Protected routes — must be logged in as a student
 // Route::middleware(EnsureStudentIsAuthenticated::class)->group(function () {
 Route::get('/students', [StudentController::class, 'index'])->name('students.index');
-Route::get('/students/{student}/edit', [StudentController::class, 'edit'])->name('students.edit');
+Route::get('/students/{id}/edit', [StudentController::class, 'edit'])->name('students.edit');
 Route::put('/students/{student}', [StudentController::class, 'update'])->name('students.update');
 Route::delete('/students/{student}', [StudentController::class, 'destroy'])->name('students.destroy');
 // });
