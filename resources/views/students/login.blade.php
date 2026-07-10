@@ -53,11 +53,7 @@
                             Student Login Portal
                         </p>
 
-                        @if($errors->any())
-                            <div class="alert alert-danger">
-                                {{ $errors->first() }}
-                            </div>
-                        @endif
+                        
 
                         <form action="{{ route('authenticate') }}" method="POST">
                             @csrf
